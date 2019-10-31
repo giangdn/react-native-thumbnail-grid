@@ -111,27 +111,39 @@ class PhotoGrid extends PureComponent {
             flexDirection: direction === "row" ? "column" : "row"
           }}
         >
-          {firstViewImages.map((image, index) => (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              key={index}
-              style={{ flex: 1 }}
-              onPress={event => this.handlePressImage(event, { image })}
-            >
-              <ImageLoad
-                style={[
-                  styles.image,
-                  {
-                    width: firstImageWidth - 8,
-                    height: firstImageHeight
-                  },
-                  this.props.imageStyle
-                ]}
-                source={typeof image === "string" ? { uri: image } : image}
-                {...imageProps}
-              />
-            </TouchableOpacity>
-          ))}
+          {firstViewImages.map((image, index) => {
+            let overlay = null;
+            if (
+              typeof image === "object" &&
+              typeof image.overlay !== undefined
+            ) {
+              overlay = image.overlay;
+              image = image.source;
+            }
+
+            return (
+              <TouchableOpacity
+                activeOpacity={0.7}
+                key={index}
+                style={{ flex: 1 }}
+                onPress={event => this.handlePressImage(event, { image })}
+              >
+                <ImageLoad
+                  style={[
+                    styles.image,
+                    {
+                      width: firstImageWidth - 8,
+                      height: firstImageHeight
+                    },
+                    this.props.imageStyle
+                  ]}
+                  source={typeof image === "string" ? { uri: image } : image}
+                  {...imageProps}
+                />
+                {overlay !== null && overlay}
+              </TouchableOpacity>
+            );
+          })}
         </View>
         {secondViewImages.length ? (
           <View
@@ -141,55 +153,70 @@ class PhotoGrid extends PureComponent {
               flexDirection: direction === "row" ? "column" : "row"
             }}
           >
-            {secondViewImages.map((image, index) => (
-              <TouchableOpacity
-                activeOpacity={0.7}
-                key={index}
-                style={{ flex: 1 }}
-                onPress={event =>
-                  this.handlePressImage(
-                    event,
-                    { image, index },
-                    secondViewImages
-                  )
-                }
-              >
-                {this.isLastImage(index, secondViewImages) ? (
-                  <ImageBackground
-                    style={[
-                      styles.image,
-                      {
-                        width: secondImageWidth - 8,
-                        height: secondImageHeight
-                      },
-                      this.props.imageStyle
-                    ]}
-                    source={typeof image === "string" ? { uri: image } : image}
-                  >
-                    <View style={styles.lastWrapper}>
-                      <Text style={[styles.textCount, this.props.textStyles]}>
-                        +
-                        {this.props.numberImagesToShow ||
-                          this.props.source.length - 5}
-                      </Text>
-                    </View>
-                  </ImageBackground>
-                ) : (
-                  <ImageLoad
-                    style={[
-                      styles.image,
-                      {
-                        width: secondImageWidth - 8,
-                        height: secondImageHeight
-                      },
-                      this.props.imageStyle
-                    ]}
-                    source={typeof image === "string" ? { uri: image } : image}
-                    {...imageProps}
-                  />
-                )}
-              </TouchableOpacity>
-            ))}
+            {secondViewImages.map((image, index) => {
+              let overlay = null;
+              if (
+                typeof image === "object" &&
+                typeof image.overlay !== undefined
+              ) {
+                overlay = image.overlay;
+                image = image.source;
+              }
+              return (
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  key={index}
+                  style={{ flex: 1 }}
+                  onPress={event =>
+                    this.handlePressImage(
+                      event,
+                      { image, index },
+                      secondViewImages
+                    )
+                  }
+                >
+                  {this.isLastImage(index, secondViewImages) ? (
+                    <ImageBackground
+                      style={[
+                        styles.image,
+                        {
+                          width: secondImageWidth - 8,
+                          height: secondImageHeight
+                        },
+                        this.props.imageStyle
+                      ]}
+                      source={
+                        typeof image === "string" ? { uri: image } : image
+                      }
+                    >
+                      <View style={styles.lastWrapper}>
+                        <Text style={[styles.textCount, this.props.textStyles]}>
+                          +
+                          {this.props.numberImagesToShow ||
+                            this.props.source.length - 5}
+                        </Text>
+                      </View>
+                    </ImageBackground>
+                  ) : (
+                    <ImageLoad
+                      style={[
+                        styles.image,
+                        {
+                          width: secondImageWidth - 8,
+                          height: secondImageHeight
+                        },
+                        this.props.imageStyle
+                      ]}
+                      source={
+                        typeof image === "string" ? { uri: image } : image
+                      }
+                      {...imageProps}
+                    />
+                  )}
+                  {overlay !== null && overlay}
+                </TouchableOpacity>
+              );
+            })}
           </View>
         ) : null}
       </View>
