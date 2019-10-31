@@ -32,14 +32,19 @@ class PhotoGrid extends PureComponent {
 
     return (
       (source.length > 5 || numberImagesToShow) &&
-      index === secondViewImages.length - 1
+      (typeof secondViewImages !== undefined &&
+        index === secondViewImages.length - 1)
     );
   };
 
   handlePressImage = (event, { image, index }, secondViewImages) =>
-    this.props.onPressImage(event, image, {
-      isLastImage: index && this.isLastImage(index, secondViewImages)
-    });
+    this.props.onPressImage(
+      event,
+      { image, index },
+      {
+        isLastImage: index && this.isLastImage(index, secondViewImages)
+      }
+    );
 
   render() {
     const { imageProps } = this.props;
@@ -126,7 +131,9 @@ class PhotoGrid extends PureComponent {
                 activeOpacity={0.7}
                 key={index}
                 style={{ flex: 1 }}
-                onPress={event => this.handlePressImage(event, { image })}
+                onPress={event =>
+                  this.handlePressImage(event, { image, index })
+                }
               >
                 <ImageLoad
                   style={[
@@ -167,13 +174,14 @@ class PhotoGrid extends PureComponent {
                   activeOpacity={0.7}
                   key={index}
                   style={{ flex: 1 }}
-                  onPress={event =>
-                    this.handlePressImage(
+                  onPress={event => {
+                    let trueIndex = firstViewImages.length + index;
+                    return this.handlePressImage(
                       event,
-                      { image, index },
+                      { image, index: trueIndex },
                       secondViewImages
-                    )
-                  }
+                    );
+                  }}
                 >
                   {this.isLastImage(index, secondViewImages) ? (
                     <ImageBackground
