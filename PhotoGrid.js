@@ -72,26 +72,38 @@ class PhotoGrid extends PureComponent {
 
     const firstImageWidth =
       direction === "column"
-        ? width / firstViewImages.length
-        : width * (1 - ratio);
+        ? (width - firstViewImages.length * 8) / firstViewImages.length
+        : (width - 8) * (1 - ratio);
     const firstImageHeight =
       direction === "column"
-        ? height * (1 - ratio)
-        : height / firstViewImages.length;
+        ? (height - 8) * (1 - ratio)
+        : (height - firstViewImages.length * 8) / firstViewImages.length;
 
     const secondImageWidth =
-      direction === "column" ? width / secondViewImages.length : width * ratio;
+      direction === "column"
+        ? (width - 8) / secondViewImages.length
+        : (width - 8) * ratio;
     const secondImageHeight =
       direction === "column"
-        ? height / secondViewImages.length
-        : height * ratio;
+        ? (height - 8) / secondViewImages.length
+        : (height - 8) * ratio;
 
-    const secondViewWidth = direction === "column" ? width : width * ratio;
-    const secondViewHeight = direction === "column" ? height * ratio : height;
+    const secondViewWidth =
+      direction === "column" ? width - 8 : (width - 8) * ratio;
+    const secondViewHeight =
+      direction === "column" ? (height - ratio * 8) * ratio : height - 8;
 
     return source.length ? (
       <View
-        style={[{ flexDirection: direction, width, height }, this.props.styles]}
+        style={[
+          {
+            flexDirection: direction,
+            width: width - 8,
+            height: height - 8,
+            margin: 4
+          },
+          this.props.styles
+        ]}
       >
         <View
           style={{
@@ -109,7 +121,10 @@ class PhotoGrid extends PureComponent {
               <ImageLoad
                 style={[
                   styles.image,
-                  { width: firstImageWidth, height: firstImageHeight },
+                  {
+                    width: firstImageWidth - 8,
+                    height: firstImageHeight
+                  },
                   this.props.imageStyle
                 ]}
                 source={typeof image === "string" ? { uri: image } : image}
@@ -143,7 +158,10 @@ class PhotoGrid extends PureComponent {
                   <ImageBackground
                     style={[
                       styles.image,
-                      { width: secondImageWidth, height: secondImageHeight },
+                      {
+                        width: secondImageWidth - 8,
+                        height: secondImageHeight
+                      },
                       this.props.imageStyle
                     ]}
                     source={typeof image === "string" ? { uri: image } : image}
@@ -160,7 +178,10 @@ class PhotoGrid extends PureComponent {
                   <ImageLoad
                     style={[
                       styles.image,
-                      { width: secondImageWidth, height: secondImageHeight },
+                      {
+                        width: secondImageWidth - 8,
+                        height: secondImageHeight
+                      },
                       this.props.imageStyle
                     ]}
                     source={typeof image === "string" ? { uri: image } : image}
@@ -199,9 +220,10 @@ PhotoGrid.defaultProps = {
 const styles = {
   image: {
     flex: 1,
-    borderWidth: 4,
+    margin: 4,
     borderColor: "#fff",
-    borderRadius: 6
+    borderRadius: 6,
+    overflow: "hidden"
   },
   lastWrapper: {
     flex: 1,
