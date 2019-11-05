@@ -32,7 +32,7 @@ class PhotoGrid extends PureComponent {
 
     return (
       (source.length > 5 || numberImagesToShow) &&
-      (typeof secondViewImages !== undefined &&
+      (typeof secondViewImages === "object" &&
         index === secondViewImages.length - 1)
     );
   };
