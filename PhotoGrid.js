@@ -78,34 +78,34 @@ class PhotoGrid extends PureComponent {
     const firstImageWidth =
       direction === "column"
         ? (width - firstViewImages.length * 8) / firstViewImages.length
-        : (width - 8) * (1 - ratio);
+        : (width - 4) * (1 - ratio);
     const firstImageHeight =
       direction === "column"
-        ? (height - 8) * (1 - ratio)
+        ? (height - 4) * (1 - ratio)
         : (height - firstViewImages.length * 8) / firstViewImages.length;
 
     const secondImageWidth =
       direction === "column"
-        ? (width - 8) / secondViewImages.length
-        : (width - 8) * ratio;
+        ? (width - 4) / secondViewImages.length
+        : (width - 4) * ratio;
     const secondImageHeight =
       direction === "column"
-        ? (height - 8) / secondViewImages.length
-        : (height - 8) * ratio;
+        ? (height - 4) / secondViewImages.length
+        : (height - 4) * ratio;
 
     const secondViewWidth =
-      direction === "column" ? width - 8 : (width - 8) * ratio;
+      direction === "column" ? width - 4 : (width - 4) * ratio;
     const secondViewHeight =
-      direction === "column" ? (height - ratio * 8) * ratio : height - 8;
+      direction === "column" ? (height - ratio * 8) * ratio : height - 4;
 
     return source.length ? (
       <View
         style={[
           {
             flexDirection: direction,
-            width: width - 8,
-            height: height - 8,
-            margin: 4
+            width: width - 4,
+            height: height - 4,
+            margin: 2
           },
           this.props.styles
         ]}
@@ -125,7 +125,6 @@ class PhotoGrid extends PureComponent {
               overlay = image.overlay;
               image = image.source;
             }
-
             return (
               <TouchableOpacity
                 activeOpacity={0.7}
@@ -139,12 +138,12 @@ class PhotoGrid extends PureComponent {
                   style={[
                     styles.image,
                     {
-                      width: firstImageWidth - 8,
+                      width: firstImageWidth - 4,
                       height: firstImageHeight
                     },
                     this.props.imageStyle
                   ]}
-                  source={typeof image === "string" ? { uri: image } : image}
+                  source={typeof image === "string" ? { uri: image } :  }
                   {...imageProps}
                 />
                 {overlay !== null && overlay}
@@ -188,7 +187,7 @@ class PhotoGrid extends PureComponent {
                       style={[
                         styles.image,
                         {
-                          width: secondImageWidth - 8,
+                          width: secondImageWidth - 4,
                           height: secondImageHeight
                         },
                         this.props.imageStyle
@@ -210,7 +209,7 @@ class PhotoGrid extends PureComponent {
                       style={[
                         styles.image,
                         {
-                          width: secondImageWidth - 8,
+                          width: secondImageWidth - 4,
                           height: secondImageHeight
                         },
                         this.props.imageStyle
@@ -255,7 +254,7 @@ PhotoGrid.defaultProps = {
 const styles = {
   image: {
     flex: 1,
-    margin: 4,
+    margin: 2,
     borderColor: "#fff",
     borderRadius: 6,
     overflow: "hidden"
