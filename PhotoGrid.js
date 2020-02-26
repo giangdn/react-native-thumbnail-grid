@@ -33,7 +33,7 @@ class PhotoGrid extends PureComponent {
     return (
       (source.length > 5 || numberImagesToShow) &&
       typeof secondViewImages === 'object' &&
-        index === secondViewImages.length - 1
+      index === secondViewImages.length - 1
     )
   }
 
@@ -77,12 +77,12 @@ class PhotoGrid extends PureComponent {
 
     const firstImageWidth =
       direction === 'column'
-        ? (width - firstViewImages.length * 8) / firstViewImages.length
+        ? (width - firstViewImages.length * 4) / firstViewImages.length
         : (width - 4) * (1 - ratio)
     const firstImageHeight =
       direction === 'column'
         ? (height - 4) * (1 - ratio)
-        : (height - firstViewImages.length * 8) / firstViewImages.length
+        : (height - firstViewImages.length * 4) / firstViewImages.length
 
     const secondImageWidth =
       direction === 'column'
@@ -96,7 +96,7 @@ class PhotoGrid extends PureComponent {
     const secondViewWidth =
       direction === 'column' ? width - 4 : (width - 4) * ratio
     const secondViewHeight =
-      direction === 'column' ? (height - ratio * 8) * ratio : height - 4
+      direction === 'column' ? (height - ratio * 4) * ratio : height - 4
 
     return source.length ? (
       <View
