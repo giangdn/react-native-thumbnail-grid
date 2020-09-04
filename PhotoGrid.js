@@ -1,12 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  View,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-  ImageBackground
-} from "react-native";
+import { View, Text, Dimensions, TouchableOpacity } from "react-native";
 import _ from "lodash";
 import ImageLoad from "react-native-image-placeholder";
 
@@ -15,7 +9,7 @@ const { width } = Dimensions.get("window");
 class PhotoGrid extends PureComponent {
   constructor(props) {
     super(props);
-    console.log(props);
+
     this.state = {
       width: props.width,
       height: props.height
@@ -53,7 +47,7 @@ class PhotoGrid extends PureComponent {
     const secondViewImages = [];
     const firstItemCount = source.length === 5 ? 2 : 1;
     let index = 0;
-    _.each(source, (img, callback) => {
+    _.each(source, img => {
       if (index === 0) {
         firstViewImages.push(img);
       } else if (index === 1 && firstItemCount === 2) {
@@ -77,7 +71,7 @@ class PhotoGrid extends PureComponent {
 
     const firstImageWidth =
       direction === "column"
-        ? (width - firstViewImages.length * 4) / firstViewImages.length
+        ? (width - firstViewImages.length * 4) / firstViewImages.length + 2
         : width * (1 - ratio);
     const firstImageHeight =
       direction === "column"
@@ -85,11 +79,13 @@ class PhotoGrid extends PureComponent {
         : (height - firstViewImages.length * 4) / firstViewImages.length;
 
     const secondImageWidth =
-      direction === "column" ? width / secondViewImages.length : width * ratio;
+      direction === "column"
+        ? width / secondViewImages.length - 2
+        : width * ratio - 2;
     const secondImageHeight =
       direction === "column"
-        ? height / secondViewImages.length
-        : height * ratio;
+        ? height / secondViewImages.length - 2
+        : height * ratio - 2;
 
     const secondViewWidth = direction === "column" ? width : width * ratio;
     const secondViewHeight =
@@ -255,7 +251,7 @@ const styles = {
   image: {
     flex: 1,
     borderColor: "#fff",
-    borderRadius: 10,
+    borderRadius: 8,
     overflow: "hidden",
     borderWidth: 1,
     borderColor: "transparent"
