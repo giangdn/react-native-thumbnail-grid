@@ -29,17 +29,12 @@ prop-types@^15.5.10:
     react-is "^16.8.1"
 
 react-is@^16.8.1:
-  version "16.11.0"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
-  integrity sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-fast-image@^8.3.2:
-  version "8.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.3.2.tgz#e9db271b70b9634b7be054760914d80954f9898c"
-  integrity sha512-AJ0b4BEswRwa0bh4SibYUtXszEiaO88Lf4CZ1ib+t5ZfkAgsMk9Liv3L0LYnDblMJmSeGTr1+2ViIM8F2vamjg==
-
-"react-native-image-placeholder@https://github.com/giangdn/react-native-image-placeholder":
+"react-native-image-placeholder@https://github.com/giangdn/react-native-image-placeholder.git":
   version "1.0.14"
-  resolved "https://github.com/giangdn/react-native-image-placeholder#0210fbd07f10d370c56aa1b4d7f890e5ef9efe29"
+  resolved "https://github.com/giangdn/react-native-image-placeholder.git#aa215027d8fe86a146528eb0724ff818a004c88c"
   dependencies:
     prop-types "^15.5.10"
