@@ -15,5 +15,9 @@
   "dependencies": {
     "react-native-fast-image": "^8.3.2",
     "react-native-image-placeholder": "https://github.com/giangdn/react-native-image-placeholder"
+  },
+  "devDependencies": {
+    "react-native-fast-image": "^8.3.2",
+    "react-native-image-placeholder": "https://github.com/giangdn/react-native-image-placeholder"
   }
 }
