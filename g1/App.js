@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+  Dimensions,
 } from 'react-native';
 
 import {
@@ -25,6 +26,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import PhotoGrid from './PhotoGrid';
+
+const {width} = Dimensions.get('window');
 
 const images = [
   'https://picsum.photos/6000/3000',
@@ -57,7 +60,7 @@ const img4 = [
   'https://picsum.photos/1600/1200',
 ];
 
-const App = () => {
+const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -76,7 +79,9 @@ const App = () => {
               <Text>aaa</Text>
               <PhotoGrid
                 source={images}
-                onPressImage={(source) => console.log(source)}
+                onPressImage={source => console.log(source)}
+                width={width}
+                height={500}
               />
               <Text>bbb</Text>
             </View>
@@ -84,7 +89,9 @@ const App = () => {
               <Text>aaa</Text>
               <PhotoGrid
                 source={img1}
-                onPressImage={(source) => console.log(source)}
+                onPressImage={source => console.log(source)}
+                width={width}
+                height={400}
               />
               <Text>bbb</Text>
             </View>
@@ -92,7 +99,9 @@ const App = () => {
               <Text>aaa</Text>
               <PhotoGrid
                 source={img2}
-                onPressImage={(source) => console.log(source)}
+                onPressImage={source => console.log(source)}
+                width={width}
+                height={500}
               />
               <Text>bbb</Text>
             </View>
@@ -100,7 +109,9 @@ const App = () => {
               <Text>aaa</Text>
               <PhotoGrid
                 source={img3}
-                onPressImage={(source) => console.log(source)}
+                onPressImage={source => console.log(source)}
+                width={width}
+                height={500}
               />
               <Text>bbb</Text>
             </View>
@@ -108,7 +119,9 @@ const App = () => {
               <Text>aaa</Text>
               <PhotoGrid
                 source={img4}
-                onPressImage={(source) => console.log(source)}
+                onPressImage={source => console.log(source)}
+                width={width}
+                height={500}
               />
               <Text>bbb</Text>
             </View>
