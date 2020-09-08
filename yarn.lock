@@ -35,6 +35,6 @@ react-is@^16.8.1:
 
 "react-native-image-placeholder@https://github.com/giangdn/react-native-image-placeholder.git":
   version "1.0.14"
-  resolved "https://github.com/giangdn/react-native-image-placeholder.git#e0dc9083aba1354a81400750444fc604e5a3a095"
+  resolved "https://github.com/giangdn/react-native-image-placeholder.git#80bcbb4203cc5b7c111470fba7c790c10167439f"
   dependencies:
     prop-types "^15.5.10"
