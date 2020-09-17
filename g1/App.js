@@ -78,6 +78,7 @@ const App: () => React$Node = () => {
             <View>
               <Text>aaa</Text>
               <PhotoGrid
+                onRemovePhoto={(image, index) => console.log(image, index)}
                 source={images}
                 onPressImage={source => console.log(source)}
                 width={width}

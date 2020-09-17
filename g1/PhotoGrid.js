@@ -1,12 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-  ImageBackground,
-} from 'react-native';
+import {View, Text, Dimensions, TouchableOpacity} from 'react-native';
 import _ from 'lodash';
 import ImageLoad from 'react-native-image-placeholder';
 
@@ -15,7 +9,7 @@ const {width} = Dimensions.get('window');
 class PhotoGrid extends PureComponent {
   constructor(props) {
     super(props);
-    console.log(props);
+
     this.state = {
       width: props.width,
       height: props.height,
@@ -46,14 +40,24 @@ class PhotoGrid extends PureComponent {
       },
     );
 
+  renderRemove = (image, index) => {
+    return (
+      <TouchableOpacity
+        onPress={() => this.props.onRemovePhoto(image, index)}
+        style={styles.removeIcon}>
+        <Text style={styles.removeX}>X</Text>
+      </TouchableOpacity>
+    );
+  };
+
   render() {
-    const {imageProps} = this.props;
+    const {imageProps, onRemovePhoto} = this.props;
     const source = _.take(this.props.source, 5);
     const firstViewImages = [];
     const secondViewImages = [];
     const firstItemCount = source.length === 5 ? 2 : 1;
     let index = 0;
-    _.each(source, (img, callback) => {
+    _.each(source, img => {
       if (index === 0) {
         firstViewImages.push(img);
       } else if (index === 1 && firstItemCount === 2) {
@@ -138,8 +142,10 @@ class PhotoGrid extends PureComponent {
                     this.props.imageStyle,
                   ]}
                   source={typeof image === 'string' ? {uri: image} : image}
-                  {...imageProps}
-                />
+                  {...imageProps}>
+                  {typeof onRemovePhoto === 'function' &&
+                    this.renderRemove(image, index)}
+                </ImageLoad>
                 {overlay !== null && overlay}
               </TouchableOpacity>
             );
@@ -207,8 +213,13 @@ class PhotoGrid extends PureComponent {
                         this.props.imageStyle,
                       ]}
                       source={typeof image === 'string' ? {uri: image} : image}
-                      {...imageProps}
-                    />
+                      {...imageProps}>
+                      {typeof onRemovePhoto === 'function' &&
+                        this.renderRemove(
+                          image,
+                          firstViewImages.length + index,
+                        )}
+                    </ImageLoad>
                   )}
                   {overlay !== null && overlay}
                 </TouchableOpacity>
@@ -260,6 +271,25 @@ const styles = {
   textCount: {
     color: '#fff',
     fontSize: 60,
+  },
+  removeIcon: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    borderWidth: 0.5,
+    borderColor: '#fff',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    lineHeight: 26,
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  removeX: {
+    lineHeight: 26,
+    fontWeight: 'bold',
+    color: '#fff',
   },
 };
 

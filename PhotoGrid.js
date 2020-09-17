@@ -40,8 +40,19 @@ class PhotoGrid extends PureComponent {
       }
     );
 
+  renderRemove = (image, index) => {
+    return (
+      <TouchableOpacity
+        onPress={() => this.props.onRemovePhoto(image, index)}
+        style={styles.removeIcon}
+      >
+        <Text style={styles.removeX}>X</Text>
+      </TouchableOpacity>
+    );
+  };
+
   render() {
-    const { imageProps } = this.props;
+    const { imageProps, onRemovePhoto } = this.props;
     const source = _.take(this.props.source, 5);
     const firstViewImages = [];
     const secondViewImages = [];
@@ -138,7 +149,10 @@ class PhotoGrid extends PureComponent {
                   ]}
                   source={typeof image === "string" ? { uri: image } : image}
                   {...imageProps}
-                />
+                >
+                  {typeof onRemovePhoto === "function" &&
+                    this.renderRemove(image, index)}
+                </ImageLoad>
                 {overlay !== null && overlay}
               </TouchableOpacity>
             );
@@ -214,7 +228,13 @@ class PhotoGrid extends PureComponent {
                         typeof image === "string" ? { uri: image } : image
                       }
                       {...imageProps}
-                    />
+                    >
+                      {typeof onRemovePhoto === "function" &&
+                        this.renderRemove(
+                          image,
+                          firstViewImages.length + index
+                        )}
+                    </ImageLoad>
                   )}
                   {overlay !== null && overlay}
                 </TouchableOpacity>
@@ -266,6 +286,25 @@ const styles = {
   textCount: {
     color: "#fff",
     fontSize: 60
+  },
+  removeIcon: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    position: "absolute",
+    top: 10,
+    right: 10,
+    borderWidth: 0.5,
+    borderColor: "#fff",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    lineHeight: 26,
+    alignItems: "center",
+    alignContent: "center"
+  },
+  removeX: {
+    lineHeight: 26,
+    fontWeight: "bold",
+    color: "#fff"
   }
 };
 
