@@ -149,11 +149,10 @@ class PhotoGrid extends PureComponent {
                   ]}
                   source={typeof image === "string" ? { uri: image } : image}
                   {...imageProps}
-                >
-                  {typeof onRemovePhoto === "function" &&
-                    this.renderRemove(image, index)}
-                </ImageLoad>
+                />
                 {overlay !== null && overlay}
+                {typeof onRemovePhoto === "function" &&
+                  this.renderRemove(image, index)}
               </TouchableOpacity>
             );
           })}
@@ -228,15 +227,12 @@ class PhotoGrid extends PureComponent {
                         typeof image === "string" ? { uri: image } : image
                       }
                       {...imageProps}
-                    >
-                      {typeof onRemovePhoto === "function" &&
-                        this.renderRemove(
-                          image,
-                          firstViewImages.length + index
-                        )}
-                    </ImageLoad>
+                    />
                   )}
                   {overlay !== null && overlay}
+                  {!this.isLastImage(index, secondViewImages) &&
+                    typeof onRemovePhoto === "function" &&
+                    this.renderRemove(image, firstViewImages.length + index)}
                 </TouchableOpacity>
               );
             })}
