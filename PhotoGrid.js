@@ -41,12 +41,17 @@ class PhotoGrid extends PureComponent {
     );
 
   renderRemove = (image, index) => {
+    const { removeIcon } = this.props;
     return (
       <TouchableOpacity
         onPress={() => this.props.onRemovePhoto(image, index)}
         style={styles.removeIcon}
       >
-        <Text style={styles.removeX}>X</Text>
+        {typeof removeIcon !== "undefined" ? (
+          removeIcon
+        ) : (
+          <Text style={styles.removeX}>X</Text>
+        )}
       </TouchableOpacity>
     );
   };
